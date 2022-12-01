@@ -1,0 +1,28 @@
+#include "Arduino.h"
+#include "Wire.h"
+#include "DFRobot_VL53L0X.h"
+
+DFRobot_VL53L0X sensor;
+int led = 2; // led output on breadboard to test sensing
+
+void setup() {
+  pinMode(led, OUTPUT);
+  Serial.begin(115200);
+  Wire.begin();
+  sensor.begin(0x50);
+  sensor.setMode(sensor.eContinuous,sensor.eHigh);
+  sensor.start();
+}
+
+void loop() 
+{
+  Serial.print("Distance (mm): ");Serial.println(sensor.getDistance()); // print distance on serial monitor
+  //dist = sensor.getDistance();
+  if (sensor.getDistance() > 150) { //if farther than 15 cm, led is on
+    digitalWrite(led, HIGH);
+  } else {
+    digitalWrite(led, LOW); // if closer than 15 cm, led is off
+  }
+  delay(10); // loop every hundredth of a second
+  
+}
