@@ -2,10 +2,6 @@
 #include "Arduino.h"
 #include "Wire.h"
 #include "DFRobot_VL53L0X.h"
-
-#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
-#error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
-#endif
 #include <SoftwareSerial.h>
 DFRobot_VL53L0X sensor;
 
