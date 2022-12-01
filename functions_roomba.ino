@@ -8,7 +8,7 @@ void fullMode(void)
   delay(1000);
 }
 
-void stop(void)
+void disconnectCommanding(void) //disconnect roomba from ESP32
 {
   Roomba.write(173);
 }
