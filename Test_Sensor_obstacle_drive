@@ -1,0 +1,134 @@
+#include <SoftwareSerial.h>
+#include "Arduino.h"
+#include "Wire.h"
+#include "DFRobot_VL53L0X.h"
+
+DFRobot_VL53L0X sensor;
+int rx = 16;
+int tx = 17;
+int dd = 4; //device detect, used to alert rooma of mcu presence
+SoftwareSerial Roomba(rx,tx);
+
+void setup() {
+
+  Serial.begin(115200);
+  Wire.begin();
+  sensor.begin(0x50);
+  sensor.setMode(sensor.eContinuous,sensor.eHigh);
+  sensor.start();
+  
+  Roomba.begin(115200);
+  
+  pinMode(dd, OUTPUT);
+
+  // wake up
+  digitalWrite(dd, HIGH);
+  delay(100);
+  digitalWrite(dd, LOW);
+  delay(500);
+  digitalWrite(dd, HIGH);
+  delay(2000);
+ 
+  Roomba.write(128);  //start in full mode
+  delay(50);
+  Roomba.write(132);
+  delay(1000);
+
+}
+
+void loop() {
+   // Serial.print("Distance (mm): ");Serial.println(sensor.getDistance());
+
+  int obstacle = 0;
+   
+   delay(500);
+
+  
+  while(true) {
+  Serial.print("Distance (mm): "); //go forward until obstacle detected
+  Serial.println(sensor.getDistance());
+  if(sensor.getDistance() > 200) {
+    Serial.println("drive");
+    obstacle = 0;
+    shortDrive();
+    } else if (obstacle < 100) {
+      Serial.println("stop");
+      obstacle += 1;
+      shortStop();
+    } else {
+      break;
+    }
+  }
+  
+  turnLeft(200, 90); // turn after obstacle
+  delay(100);
+   while(true) {
+  Serial.print("Distance (mm): "); //go forward until 2nd obstacle
+  Serial.println(sensor.getDistance());
+  if(sensor.getDistance() > 200) {
+    obstacle = 0;
+    shortDrive();
+    } else if (obstacle < 100) {
+      obstacle += 1;
+      shortStop();
+    } else {
+      break;
+    }
+  }
+
+ /* while (true) {
+  driveWheelV(200,200);
+    delay(1);
+    if (sensor.getDistance() < 170) {
+      digitalWrite(in, HIGH);
+      break;
+    }
+  }*/
+  Roomba.write(133);
+}
+
+
+void driveWheelV(int right, int left)
+{
+  
+  Roomba.write(145);
+  Roomba.write(right >> 8);
+  Roomba.write(right);
+  Roomba.write(left >> 8);
+  Roomba.write(left);
+}
+
+void shortDrive()
+{
+  driveWheelV(200, 200);
+  delay(1);
+}
+
+void shortStop()
+{
+  driveWheelV(0, 0);
+  delay(1);
+}
+
+void drive(int velocity, int radius)
+{
+  Roomba.write(137);
+  Roomba.write(velocity >> 8);
+  Roomba.write(velocity);
+  Roomba.write(radius >> 8);
+  Roomba.write(radius);
+}
+
+void turnRight(int velocity, int degrees)
+{
+  drive(velocity, -1);
+  delay((735000/velocity)/(360/degrees));
+  drive(0,0);
+}
+
+void turnLeft(int velocity, int degrees)
+{
+  drive(velocity, 1); 
+  delay((790000/velocity)/(360/degrees));
+  drive(0,0);
+}
