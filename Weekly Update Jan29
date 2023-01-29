@@ -1,4 +1,14 @@
 James:
+PCB:
+-I updated the design of the PCB to have terminal blocks for inputs/outputs, the ESP32-E, components that are all in stock, and a multiplexer to 
+handle 5 unadressable infrared distance sensors on an I2C bus. I also added a bidirectional logic level shifter to allow the Roomba tx to communicate
+with the ESP32 rx (uart. Before there was only ESP32tx/Roombarx communication). The components for the PCB were ordered on Wednesday January 25th and 
+arrived on Thursday January 26th. The PCB was ordered through Advanced Circuits on Thursday January 26th and expected to be shipped out through UPS 
+ground on Wednesday February 1st, meaning we can expect to have the PCB in our hands between Thursday February 2nd and Wednesday February 8th. 
+Enough components for 3 boards were ordered, and 3 PCBs were ordered.
+Sensors:
+-5 IR distance sensors were ordered and have arrived. As mentioned above, they are unadressable so an 8:1 multiplexer has been added to mimic 
+addressing.
 
 Todd:
 
