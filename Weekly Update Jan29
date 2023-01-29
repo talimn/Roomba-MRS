@@ -1,0 +1,17 @@
+James:
+
+Todd:
+
+Taylor: 
+Algorithm fixes: 
+- When target point is out of range (x-z coordinates that are not on plane), path to coordinates will still be calculated.
+When Roomba reaches wall or barrier in attempt to approach this point, it will stop movement completely to indicate invalid coordinates. 
+- Previous unexplained error of game objects skipping coordinates or beginning recalculation of path to next coordinate before fully completing current path.
+The difference in distance between target point and current point was tested with different values to find an ideal range that could prevent this from happening.
+When plane was scaled to larger dimensions, the pathing calculation errors were reduced.
+- If target point is directly on the other side of an obstacle, Roomba no longer slows down to an extremely low speed as it travels around the obstacle's edge. 
+Speed may be reduced depending on obstacle size or movement but only by a small amount.
+General:
+- All code updated and transferred to a new Unity project to be committed to Github. Unity has been linked to Github account but there are current issues with
+committing all the files to the Roomba-MRS repository. This issue should be fixed this week.
+- Plan to create a UI for current Unity setup so that same files may be used and necessary changes can be easily made.
