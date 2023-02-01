@@ -11,6 +11,12 @@ Sensors:
 addressing.
 
 Todd:
+-I updated the anchor locations to be at the corners of the work area. I have implemented this with a 10 ft by 10ft area. This setup has sensors at (0,0), 
+(10,0), and (0, 10) in coordinate locations. 
+- I have tested averaging with this new orientation to be repeatable up to 3x a second. This is using a running average to minimize jumping. 
+- I am helping Taylor get the Unity files tracked in this Git Repo using Github Desktop app.
+- The next step moving forward is to build a GUi in Unity and start integrating Bluetooth control in between the app and the Roomba. This correlates with
+the execution plan shown in our presentation.
 
 Taylor: 
 Algorithm fixes: 
