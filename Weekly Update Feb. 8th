@@ -1,0 +1,13 @@
+2/8/23
+
+James:
+-PCB:
+      Due to weather, the UPS package was delayed. The PCB arrived in the mail last night (Tueasday 2/7). 
+      Now that I have the PCB and components, I can begin assembling the board.
+-Firmware:
+      I updated the Roomba control firmware to use five distance sensors instead of one. Also ensured
+      that Roomba is properly working and ready for pathfinding integration.
+-Mounting:
+      I started using and learning Autocad so that a mounting system for the PCB, sensors, and 
+      localization modules can be designed.
+
