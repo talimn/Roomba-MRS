@@ -1,0 +1,9 @@
+Taylor: Currently designing UI in Unity. Design will consist of buttons sending directional commands to the Roombas and two selector buttons to choose between which 
+Roomba to manually control. An override button will permit user to assume manual control over movement of Roombas and an indicator will show the override status.
+Plan to include console output at the the bottom of the UI as well.
+Two scenes will be run simultaneously, one for running the pathfinding and the other for observing movement in real life. Scenes run separately and the pathfinding
+scripts are separate. Each Roomba currently has its own point-to-point pathfinding script.
+
+James:
+
+Todd:
