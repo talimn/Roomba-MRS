@@ -1,5 +1,9 @@
 James:
 
-Taylor:
+Taylor: Completed UI design in game view of Unity simulation. Console view is full operational and multiple commands can be entered in so that the console will give
+information about the system. If user enters 'reload', game will reinitialize and Roombas will return to starting point. If user enters 'location', the 3D coordinates
+of each Roomba will be displayed in the console view.
+Still need to add scripts to direction buttons and override toggle to have complete functionality. Currently working with James to connect ESP32 to Unity project via
+bluetooth. The bluetooth connection between my computer and the ESP32 is successful but still need to connect to Unity using the bluetooth package imported into project.
 
 Todd:
