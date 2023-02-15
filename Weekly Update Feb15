@@ -1,4 +1,8 @@
-James:
+James: Todd and I soldered the PCB, I tested it on Thursday and Friday. Unfortunately the board does not work, I think there is a short from soldering (probably
+done by me). As Todd has much more soldering experience than me, I gave him the extra materials to solder another board so we can get one up and running. In the
+mean time, I redesigned the PCB from scratch with cheaper components, components that are easier to solder, larger trace widths, and components that are used 
+and proven in my breadboard. The idea was to be proactive about any problems that might be occuring so that we don't get behind. New PCB was ordered on Sunday 2/12
+and components are already here. I also tested a multiplexer switch to support five sensors. Currently working with Taylor to integrate. 
 
 Taylor: Completed UI design in game view of Unity simulation. Console view is full operational and multiple commands can be entered in so that the console will give
 information about the system. If user enters 'reload', game will reinitialize and Roombas will return to starting point. If user enters 'location', the 3D coordinates
