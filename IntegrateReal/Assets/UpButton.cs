@@ -19,7 +19,7 @@ public class UpButton : MonoBehaviour
 
     void TaskUp()
     {
-        Debug.Log("You are moving up!");
+        Debug.Log("You are definitely moving up!");
     }
 
     void TaskDown()
