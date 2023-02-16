@@ -1,0 +1,30 @@
+{
+    "UxmlGuid": "5d2b0b6aac1959a439d0d85e3208526b",
+    "UxmlPath": "Assets/integrateui.uxml",
+    "CanvasX": 0,
+    "CanvasY": 0,
+    "CanvasWidth": 576,
+    "CanvasHeight": 448,
+    "MatchGameView": false,
+    "ZoomScale": 1.0,
+    "PanOffset": {
+        "x": 23.0,
+        "y": 26.0
+    },
+    "ColorModeBackgroundOpacity": 1.0,
+    "ImageModeCanvasBackgroundOpacity": 1.0,
+    "CameraModeCanvasBackgroundOpacity": 1.0,
+    "EnableCanvasBackground": false,
+    "CanvasBackgroundMode": 0,
+    "CanvasBackgroundColor": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 255.0
+    },
+    "CanvasBackgroundImage": {
+        "instanceID": 0
+    },
+    "CanvasBackgroundImageScaleMode": 1,
+    "CanvasBackgroundCameraName": ""
+}

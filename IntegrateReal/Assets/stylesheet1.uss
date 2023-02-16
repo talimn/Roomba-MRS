@@ -1,0 +1,108 @@
+.button1 {
+    width: 20px;
+    height: 20px;
+    font-size: 5px;
+    background-color: rgb(250, 250, 169);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-top-width: 5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: rgb(0, 0, 0);
+    margin-left: 80px;
+    margin-right: 80px;
+    -unity-font-style: bold;
+    border-left-color: rgb(40, 40, 40);
+    border-right-color: rgb(40, 40, 40);
+    border-top-color: rgb(40, 40, 40);
+    border-bottom-color: rgb(40, 40, 40);
+}
+
+.button3 {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    background-color: rgb(219, 169, 250);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-top-width: 5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: rgb(0, 0, 0);
+    -unity-font-style: bold;
+    border-left-color: rgb(34, 34, 34);
+    border-right-color: rgb(34, 34, 34);
+    border-top-color: rgb(34, 34, 34);
+    border-bottom-color: rgb(34, 34, 34);
+}
+
+.button4 {
+    width: 20px;
+    height: 20px;
+    font-size: 5px;
+    background-color: rgb(250, 170, 169);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-top-width: 5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: rgb(0, 0, 0);
+    -unity-font-style: bold;
+    border-left-color: rgb(34, 34, 34);
+    border-right-color: rgb(34, 34, 34);
+    border-top-color: rgb(34, 34, 34);
+    border-bottom-color: rgb(34, 34, 34);
+}
+
+.button5 {
+    width: 20px;
+    height: 20px;
+    font-size: 5px;
+    background-color: rgb(169, 250, 190);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-top-width: 5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: rgb(0, 0, 0);
+    margin-left: 70px;
+    margin-right: 70px;
+    -unity-font-style: bold;
+    border-left-color: rgb(34, 34, 34);
+    border-right-color: rgb(34, 34, 34);
+    border-top-color: rgb(34, 34, 34);
+    border-bottom-color: rgb(34, 34, 34);
+}
+
+.button2 {
+    width: 20px;
+    height: 20px;
+    font-size: 5px;
+    background-color: rgb(169, 212, 250);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-top-width: 5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: rgb(0, 0, 0);
+    -unity-font-style: bold;
+    border-left-color: rgb(34, 34, 34);
+    border-right-color: rgb(34, 34, 34);
+    border-top-color: rgb(34, 34, 34);
+    border-bottom-color: rgb(34, 34, 34);
+}
