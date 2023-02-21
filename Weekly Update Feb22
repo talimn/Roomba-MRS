@@ -1,1 +1,4 @@
-
+Currently in team integration process between pathfinding and controls subsystems using a Unity bluetooth plugin.
+Plan to attach a main script to a game object in Unity and scan for the ESP32.
+PCB has been soldered and is working properly.
+New PCB Design came in and the components came in.
