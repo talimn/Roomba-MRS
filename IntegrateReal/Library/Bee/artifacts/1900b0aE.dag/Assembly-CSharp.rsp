@@ -407,6 +407,7 @@
 "Assets/Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs"
 "Assets/BluetoothMain.cs"
 "Assets/ConsoleView.cs"
+"Assets/Movement.cs"
 "Assets/myUI.cs"
 "Assets/RadioButtonSystem.cs"
 "Assets/Scenes/CameraFollowCapsule.cs"

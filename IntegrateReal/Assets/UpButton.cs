@@ -6,7 +6,12 @@ using UnityEngine.UI;
 public class UpButton : MonoBehaviour
 {
     public Button m_UpButton, m_DownButton, m_LeftButton, m_RightButton, m_StopButton;
-    
+    public GameObject rmba;
+    private float speed = 5.0f;
+    public string inputID;
+    private float horizontalInput;
+    private float forwardInput;
+
     void Start()
     {
 
@@ -20,21 +25,25 @@ public class UpButton : MonoBehaviour
     void TaskUp()
     {
         Debug.Log("You are definitely, certainly moving up!");
+        transform.Translate(0.05f, 0.0f, 0f);
     }
 
     void TaskDown()
     {
         Debug.Log("You are moving down!");
+        transform.Translate(-0.05f, 0f, 0f);
     }
 
     void TaskLeft()
     {
         Debug.Log("You are moving left!");
+        transform.Translate(0f, -0.5f, 0f);
     }
 
     void TaskRight()
     {
         Debug.Log("You are moving right!");
+        transform.Translate(0f, 0.5f, 0f);
     }
 
     void TaskStop()
