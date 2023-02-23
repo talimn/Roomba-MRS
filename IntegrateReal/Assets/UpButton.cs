@@ -8,7 +8,12 @@ public class UpButton : MonoBehaviour
     public Button m_UpButton, m_DownButton, m_LeftButton, m_RightButton, m_StopButton;
     public GameObject rmba;
     private float speed = 5.0f;
-    public string inputID;
+    private bool goUp = false;
+    private bool goDown = false;
+    private bool goLeft = false;
+    private bool goRight = false;
+    private bool goStop = false;
+    public string upInput;
     private float horizontalInput;
     private float forwardInput;
 
@@ -25,35 +30,80 @@ public class UpButton : MonoBehaviour
     void TaskUp()
     {
         Debug.Log("You are definitely, certainly moving up!");
-        transform.Translate(0.05f, 0.0f, 0f);
+        goUp = true;
+        goDown = false;
+        goLeft = false;
+        goRight = false;
+        goStop = false;
+        Update();
     }
 
     void TaskDown()
     {
         Debug.Log("You are moving down!");
-        transform.Translate(-0.05f, 0f, 0f);
+        goDown = true;
+        goUp = false;
+        goLeft = false;
+        goRight = false;
+        goStop = false;
     }
 
     void TaskLeft()
     {
         Debug.Log("You are moving left!");
-        transform.Translate(0f, -0.5f, 0f);
+        goLeft = true;
+        goUp = false;
+        goDown = false;
+        goRight = false;
+        goStop = false;
     }
 
     void TaskRight()
     {
         Debug.Log("You are moving right!");
-        transform.Translate(0f, 0.5f, 0f);
+        goRight = true;
+        goUp = false;
+        goDown = false;
+        goLeft = false;
+        goStop = false;
     }
 
     void TaskStop()
     {
         Debug.Log("You have stopped!");
+        goStop = true;
+        goUp = false;
+        goDown = false;
+        goLeft = false;
+        goRight = false;
     }
     // Update is called once per frame
     void Update()
     {
+        if ((goUp) && (!goDown) && (!goRight) && (!goLeft) && (!goStop))
+        {
+            transform.Translate(0.05f * Time.deltaTime * speed, 0f, 0f);
+        }
         
+        else if((goDown) && (!goUp) && (!goRight) && (!goLeft) && (!goStop))
+        {
+            transform.Translate(-0.05f * Time.deltaTime * speed, 0f, 0f);
+        }
+
+        else if((!goDown) && (!goUp) && (!goRight) && (goLeft) && (!goStop))
+        {
+            transform.Translate(0f, -0.5f * Time.deltaTime * speed, 0f);
+        }
+
+        else if((!goDown) && (!goUp) && (goRight) && (!goLeft) && (!goStop))
+        {
+            transform.Translate(0f, 0.5f * Time.deltaTime * speed, 0f);
+        }
+
+        else if ((!goDown) && (!goUp) && (!goRight) && (!goLeft) && (goStop))
+        {
+            transform.Translate(0f * Time.deltaTime * speed, 0f * Time.deltaTime * speed, 0);
+        }
     }
 
     
