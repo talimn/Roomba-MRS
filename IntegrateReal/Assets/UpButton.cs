@@ -16,6 +16,7 @@ public class UpButton : MonoBehaviour
     private bool goLeft = false;
     private bool goRight = false;
     private bool goStop = false;
+    private bool overrideStatus = false;
     
 
     void Start()
@@ -83,7 +84,7 @@ public class UpButton : MonoBehaviour
     void TaskOverride()
     {
         Debug.Log("Override clicked!");
-
+        overrideStatus = true;
     }
 
     
@@ -91,27 +92,27 @@ public class UpButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((goUp) && (!goDown) && (!goRight) && (!goLeft) && (!goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)))
+        if ((goUp) && (!goDown) && (!goRight) && (!goLeft) && (!goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)) && (overrideStatus))
         {
             transform.Translate(0.05f * Time.deltaTime * speed, 0f, 0f);
         }
         
-        else if((goDown) && (!goUp) && (!goRight) && (!goLeft) && (!goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)))
+        else if((goDown) && (!goUp) && (!goRight) && (!goLeft) && (!goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)) && (overrideStatus))
         {
             transform.Translate(-0.05f * Time.deltaTime * speed, 0f, 0f);
         }
 
-        else if((!goDown) && (!goUp) && (!goRight) && (goLeft) && (!goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)))
+        else if((!goDown) && (!goUp) && (!goRight) && (goLeft) && (!goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)) && (overrideStatus))
         {
             transform.Translate(0f, -0.5f * Time.deltaTime * speed, 0f);
         }
 
-        else if((!goDown) && (!goUp) && (goRight) && (!goLeft) && (!goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)))
+        else if((!goDown) && (!goUp) && (goRight) && (!goLeft) && (!goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)) && (overrideStatus))
         {
             transform.Translate(0f, 0.5f * Time.deltaTime * speed, 0f);
         }
 
-        else if ((!goDown) && (!goUp) && (!goRight) && (!goLeft) && (goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)))
+        else if ((!goDown) && (!goUp) && (!goRight) && (!goLeft) && (goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)) && (overrideStatus))
         {
             transform.Translate(0f * Time.deltaTime * speed, 0f * Time.deltaTime * speed, 0);
         }
