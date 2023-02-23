@@ -339,7 +339,6 @@
 -r:"C:/Users/toddv/Documents/GitHub/Roomba-MRS/IntegrateReal/Library/PackageCache/com.unity.visualscripting@1.7.8/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
--analyzer:"Assets/Plugins/Android/ArduinoBluetoothAPI.dll"
 "Assets/Assets/AstarPathfindingProject/Behaviors/AIDestinationSetter.cs"
 "Assets/Assets/AstarPathfindingProject/Behaviors/Patrol.cs"
 "Assets/Assets/AstarPathfindingProject/Core/AI/AIBase.cs"

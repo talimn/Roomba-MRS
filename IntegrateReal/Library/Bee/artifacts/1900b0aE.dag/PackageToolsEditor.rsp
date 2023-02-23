@@ -344,7 +344,6 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.TestRunner.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
--analyzer:"Assets/Plugins/Android/ArduinoBluetoothAPI.dll"
 "Assets/Assets/AstarPathfindingProject/PackageTools/Editor/EditorBase.cs"
 "Assets/Assets/AstarPathfindingProject/PackageTools/Editor/EditorGUIx.cs"
 "Assets/Assets/AstarPathfindingProject/PackageTools/Editor/EnumFlagDrawer.cs"

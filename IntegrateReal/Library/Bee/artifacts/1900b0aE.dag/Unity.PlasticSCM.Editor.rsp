@@ -333,7 +333,6 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.TestRunner.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
--analyzer:"Assets/Plugins/Android/ArduinoBluetoothAPI.dll"
 "Library/PackageCache/com.unity.collab-proxy@1.17.1/Editor/PlasticSCM/AssemblyInfo.cs"
 "Library/PackageCache/com.unity.collab-proxy@1.17.1/Editor/PlasticSCM/AssetMenu/AssetFilesFilterPatternsMenuBuilder.cs"
 "Library/PackageCache/com.unity.collab-proxy@1.17.1/Editor/PlasticSCM/AssetMenu/AssetMenuItems.cs"
