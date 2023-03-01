@@ -1,1 +1,4 @@
-
+Integration between pathfinding and control systems: commands can be sent to the Roomba through Unity. Will work with these commands in next lab time.
+Unity UI direction buttons have been completed. Still plan to make necessary adjustments based on needs of project throughout semester. 
+Only one Roomba can be selected for manual control at a time, so there will not be any overwritten commands in simulation.
+Plan to integrate localization and pathfinding subsystem over upcoming week.
