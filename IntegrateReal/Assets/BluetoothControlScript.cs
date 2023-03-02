@@ -5,23 +5,95 @@ using ArduinoBluetoothAPI;
 
 public class BluetoothControlScript : MonoBehaviour
 {
-    BluetoothHelper helper;
+    BluetoothHelper btRoomba1;
+    BluetoothHelper btRoomba2;
+
     // Start is called before the first frame update
     void Start()
     {
-        helper = BluetoothHelper.GetInstance();
-        helper.setDeviceName("4.0James_ESP32");
-        helper.setTerminatorBasedStream("\n");
+        btRoomba1 = BluetoothHelper.GetInstance();
+        btRoomba1 = BluetoothHelper.GetInstance();
+
+        btRoomba1.setDeviceName("4.0James_ESP32");
+        btRoomba1.setTerminatorBasedStream("\n");
+
+        btRoomba2.setDeviceName("4.0James_ESP32_2");
+        btRoomba2.setTerminatorBasedStream("\n");
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Attempting to connect");
-        helper.Connect();
-        Debug.Log("Device Paired: " + helper.isDevicePaired());
-        Debug.Log("Device Connected: " + helper.isConnected());
+    }
 
-        helper.SendData("j\n");
+    public int connectRoombaOne()
+    {
+        Debug.Log("Attempting to connect Roomba 1");
+        btRoomba1.Connect();
+        if (btRoomba1.isConnected())
+        {
+            return 1;
+        }
+        else if (btRoomba1.isDevicePaired())
+        {
+            return 2;
+        }
+        return -1;
+    }
+
+    public int connectRoombaTwo()
+    {
+        Debug.Log("Attempting to connect Roomba 2");
+        btRoomba2.Connect();
+        if (btRoomba2.isConnected())
+        {
+            return 1;
+        }
+        else if (btRoomba2.isDevicePaired())
+        {
+            return 2;
+        }
+        return -1;
+    }
+
+    public bool isRoombaOneReady()
+    {
+        return btRoomba1.isConnected();
+    }
+    public bool isRoombaTwoReady()
+    {
+        return btRoomba2.isConnected();
+    }
+
+    public int sendData(int RoombaNum, char command)
+    {
+        switch(RoombaNum)
+        {
+            case 1:
+                if (!isRoombaOneReady())
+                {
+                    connectRoombaOne(); // If not ready, try and make it ready.  
+                }
+                if (isRoombaOneReady())
+                {
+                    btRoomba1.SendData(command + "\n");
+                    return 1;
+                    // Send the Command
+                }
+                break;
+            case 2:
+                if (!isRoombaTwoReady())
+                {
+                    connectRoombaTwo(); // If not ready, try and make it ready.  
+                }
+                if (isRoombaTwoReady())
+                {
+                    btRoomba1.SendData(command + "\n");
+                    return 1;
+                    // Send the Command
+                }
+                break;
+        }
+        return 0;
     }
 }
