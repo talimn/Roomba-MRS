@@ -10,7 +10,7 @@ public class UpButton : MonoBehaviour
     public GameObject toggler;
     
 
-    private float speed = 5.0f;
+    private float speed = 2.0f;
     private bool goUp = false;
     private bool goDown = false;
     private bool goLeft = false;
@@ -94,12 +94,12 @@ public class UpButton : MonoBehaviour
     {
         if ((goUp) && (!goDown) && (!goRight) && (!goLeft) && (!goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)) && (overrideStatus))
         {
-            transform.Translate(0.05f * Time.deltaTime * speed, 0f, 0f);
+            transform.Translate(0.5f * Time.deltaTime * speed, 0f, 0f);
         }
         
         else if((goDown) && (!goUp) && (!goRight) && (!goLeft) && (!goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)) && (overrideStatus))
         {
-            transform.Translate(-0.05f * Time.deltaTime * speed, 0f, 0f);
+            transform.Translate(-0.5f * Time.deltaTime * speed, 0f, 0f);
         }
 
         else if((!goDown) && (!goUp) && (!goRight) && (goLeft) && (!goStop) && (toggleChoice(toggler.GetComponent<Toggle>().isOn)) && (overrideStatus))
