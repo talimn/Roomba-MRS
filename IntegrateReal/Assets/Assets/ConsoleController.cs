@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine.UI;
 
 public delegate void CommandHandler(string[] args);
 
@@ -19,7 +20,10 @@ public class ConsoleController
 	public event VisibilityChangedHandler visibilityChanged;
 	#endregion
 
+
 	
+
+
 	class CommandRegistration
 	{
 		public string command { get; private set; }
@@ -52,13 +56,14 @@ public class ConsoleController
 	{
 		//When adding commands, you must add a call below to registerCommand() with its name, implementation method, and help text.
 		registerCommand("babble", babble, "Example command that demonstrates how to parse arguments. babble [word] [# of times to repeat]");
-		registerCommand("echo", echo, "echoes arguments back as array (for testing argument parser)");
+		registerCommand("echo", echo, "Echoes arguments back as array (for testing argument parser)");
 		registerCommand("help", help, "Print this help.");
 		registerCommand("hide", hide, "Hide the console.");
 		registerCommand(repeatCmdName, repeatCommand, "Repeat last command.");
 		registerCommand("reload", reload, "Reload game.");
-		registerCommand("resetprefs", resetPrefs, "Reset & saves PlayerPrefs.");
-		registerCommand("location", locations, "Press override for manual control");
+		registerCommand("resetprefs", resetPrefs, "Reset & saves player preferences.");
+		registerCommand("location", locations, "Find current location of each Roomba in scene.");
+		registerCommand("override", consoleOverride, "Get information about control override status.");
 	}
 
 	void registerCommand(string command, CommandHandler handler, string help)
@@ -247,6 +252,20 @@ public class ConsoleController
 		appendLogLine((GameObject.Find("Roomba1").transform.position).ToString());
 		appendLogLine("Roomba 2: ");
 		appendLogLine((GameObject.Find("Roomba2").transform.position).ToString());
+    }
+
+	void consoleOverride(string[] args)
+    {
+		
+		if ((GameObject.Find("Override Indicator").GetComponent<Image>().color).ToString() == "RGBA(0.000, 255.000, 0.000, 1.000)")
+        {
+			appendLogLine("OVERRIDE ENABLED. Use buttons to control Roomba movement.");
+        }
+        else
+        {
+			appendLogLine("Override NOT enabled. Press override button to override Roomba control.");
+        }
+		
     }
 	#endregion
 }

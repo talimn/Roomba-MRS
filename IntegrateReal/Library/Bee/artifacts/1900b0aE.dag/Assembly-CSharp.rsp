@@ -416,6 +416,7 @@
 "Assets/BluetoothControlScript.cs"
 "Assets/BluetoothMain.cs"
 "Assets/ConsoleView.cs"
+"Assets/IndicatorLight.cs"
 "Assets/Movement.cs"
 "Assets/myUI.cs"
 "Assets/RadioButtonSystem.cs"
