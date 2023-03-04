@@ -64,6 +64,7 @@ public class ConsoleController
 		registerCommand("resetprefs", resetPrefs, "Reset & saves player preferences.");
 		registerCommand("location", locations, "Find current location of each Roomba in scene.");
 		registerCommand("override", consoleOverride, "Get information about control override status.");
+		registerCommand("quit", endGame, "End Roomba operation.");
 	}
 
 	void registerCommand(string command, CommandHandler handler, string help)
@@ -266,6 +267,12 @@ public class ConsoleController
 			appendLogLine("Override NOT enabled. Press override button to override Roomba control.");
         }
 		
+    }
+
+	void endGame(string[] args)
+    {
+		//Application.Quit();
+		appendLogLine("This command has not been completed yet.");
     }
 	#endregion
 }

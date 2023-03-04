@@ -36,7 +36,7 @@ public class UpButton : MonoBehaviour
 
     void TaskUp()
     {
-        Debug.Log("You are definitely, certainly moving up!");
+        Debug.Log("You are moving forward.");
         
         switch (overideState)
         {
@@ -58,7 +58,7 @@ public class UpButton : MonoBehaviour
 
     void TaskDown()
     {
-        Debug.Log("You are moving backwards!");
+        Debug.Log("You are moving backwards.");
 
         switch (overideState)
         {
@@ -84,7 +84,7 @@ public class UpButton : MonoBehaviour
 
     void TaskLeft()
     {
-        Debug.Log("You are moving left!");
+        Debug.Log("You are moving left.");
         switch (overideState)
         {
             case OVERRIDE_STATE.ROOMBA1:
@@ -105,7 +105,7 @@ public class UpButton : MonoBehaviour
 
     void TaskRight()
     {
-        Debug.Log("You are moving right!");
+        Debug.Log("You are moving right.");
         switch (overideState)
         {
             case OVERRIDE_STATE.ROOMBA1:
@@ -126,7 +126,7 @@ public class UpButton : MonoBehaviour
 
     void TaskStop()
     {
-        Debug.Log("You have stopped!");
+        Debug.Log("You have stopped.");
         switch (overideState)
         {
             case OVERRIDE_STATE.ROOMBA1:
@@ -147,7 +147,7 @@ public class UpButton : MonoBehaviour
 
     void TaskOverride()
     {
-        Debug.Log("Override clicked!");
+        Debug.Log("Override clicked.");
         if (toggleChoice(roomba1check.GetComponent<Toggle>().isOn))
         {
             overideState = OVERRIDE_STATE.ROOMBA1;
