@@ -1,1 +1,2 @@
-
+Put a mini DIN7 connector on the pcb. Multiplexer can now choose between multiple sensors. 
+Have begun writing code to track encoder values on Roomba motors.
