@@ -123,9 +123,9 @@ public class AstarAI2 : MonoBehaviour
 
         // Go to next point
         //POINT 1
-        if ((AbsVal(transform.position.x, targetPosition.x) < 5.0f) && (x < 2))
+        if ((AbsVal(transform.position.x, targetPosition.x) < 2.0f) && (x < 2))
         {
-            newTarg = new Vector3(-49.0f, 0.0f, -49.0f);
+            newTarg = new Vector3(-10.0f, 0.0f, -10.0f);
             targetPosition = newTarg;
             //put variable here to take value assigned to targetPosition
             currentWaypoint = 0;
@@ -133,14 +133,14 @@ public class AstarAI2 : MonoBehaviour
             Update();
         }
         //POINT 2
-        else if ((AbsVal(transform.position.x, targetPosition.x) < 5.0f) && (y < 2))
+        else if ((AbsVal(transform.position.x, targetPosition.x) < 2.0f) && (y < 2))
         {
             //newTarg = new Vector3(-1.7f, 0.0f, 1.0f);
             //targetPosition = newTarg;
             //currentWaypoint = 0;
             //y++;
 
-            newTarg = new Vector3(49.0f, 0.0f, 49.0f);
+            newTarg = new Vector3(12.0f, 0.0f, 12.0f);
             targetPosition = newTarg;
             currentWaypoint = 0;
             y++;
@@ -162,10 +162,10 @@ public class AstarAI2 : MonoBehaviour
         }*/
 
         // POINT 4
-        else if ((AbsVal(transform.position.x, targetPosition.x) < 5.0f) && (w < 2))
+        else if ((AbsVal(transform.position.x, targetPosition.x) < 2.0f) && (w < 2))
         {
 
-            newTarg = new Vector3(49.0f, 0.0f, -49.0f);
+            newTarg = new Vector3(11.0f, 0.0f, -11.0f);
             targetPosition = newTarg;
             currentWaypoint = 0;
             w++;
@@ -176,10 +176,10 @@ public class AstarAI2 : MonoBehaviour
 
         // POINT 5
 
-        else if ((AbsVal(transform.position.x, targetPosition.x) < 5.0f) && (r < 2))
+        else if ((AbsVal(transform.position.x, targetPosition.x) < 2.0f) && (r < 2))
         {
 
-            newTarg = new Vector3(-49.0f, 0.0f, 49.0f);
+            newTarg = new Vector3(-10.0f, 0.0f, 9.0f);
             targetPosition = newTarg;
             currentWaypoint = 0;
             r++;
