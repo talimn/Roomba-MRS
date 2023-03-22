@@ -2,6 +2,7 @@
 //using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.UI;
 
 
 
@@ -10,6 +11,8 @@ public class AstarAI2 : MonoBehaviour
     // The point to which the capsule will move
     // Will be performed in A*
     // The targetPosition variable can be changed in inspector to be any GameObject
+    public enum OVERRIDE_STATE { NONE, ROOMBA1, ROOMBA2 };
+    private OVERRIDE_STATE overideState;
 
     public Vector3 offs;
     private Vector3 targetPosition = new Vector3(-2.0f, 0.0f, -1.287f);
@@ -22,10 +25,16 @@ public class AstarAI2 : MonoBehaviour
     private int r = 0;
     private float sum = 0.0f;
 
+    // toggle values
+    public GameObject R1Check;
+    public GameObject R2Check;
+
 
     private Seeker seeker;
     private CharacterController controller;
 
+    // override button
+    public Button myOverButton;
     //the calculated path
     public Path path;
 
@@ -45,9 +54,11 @@ public class AstarAI2 : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        overideState = OVERRIDE_STATE.NONE;
         //get a reference to the seeker component
         seeker = GetComponent<Seeker>();
         controller = GetComponent<CharacterController>();
+        myOverButton.onClick.AddListener(OBTask);
     }
 
     public void OnPathComplete(Path p)
@@ -63,6 +74,26 @@ public class AstarAI2 : MonoBehaviour
         }
     }
 
+    //OVERRIDE MANUAL CONTROL
+    void OBTask()
+    {
+        if (toggleChoiceForPath(R1Check.GetComponent<Toggle>().isOn))
+        {
+            overideState = OVERRIDE_STATE.ROOMBA1;
+        }
+        else if (toggleChoiceForPath(R2Check.GetComponent<Toggle>().isOn))
+        {
+            overideState = OVERRIDE_STATE.ROOMBA2;
+        }
+        else
+        {
+            overideState = OVERRIDE_STATE.NONE;
+        }
+    }
+
+
+
+    // find absolute value of difference in distance
     public float AbsVal(float a, float b)
     {
         sum = a - b;
@@ -197,4 +228,8 @@ public class AstarAI2 : MonoBehaviour
 
     }
 
+    public bool toggleChoiceForPath(bool toggs)
+    {
+        return toggs;
+    }
 }    
