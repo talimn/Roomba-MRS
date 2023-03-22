@@ -1,0 +1,3 @@
+Pathfinding subsytem has been integrated with both localization and controls subsystems. All testing will be performed in the Unity project going forward.
+All buttons, toggles, and functions of Unity UI game bar work as intended for use with the Roomba. User can now find information on override status through UI console.
+Project console prints status of Roomba connection, current travel direction, and which Roomba is operating under manual control.
