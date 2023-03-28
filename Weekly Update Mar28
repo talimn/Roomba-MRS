@@ -1,0 +1,3 @@
+Pathfinding: Script for algorithm on testing has been written. This is a very basic test script which will be simply used for testing purposes and then built upon
+until the full algorithm is working properly on the Roomba. The beginning test will be a highly controlled path (series of directions) that the Roomba will follow.
+The path will be adjusted to include more complicated instructions such as more frequent turns for other beginning tests.
