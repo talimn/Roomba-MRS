@@ -59,11 +59,12 @@ public class ConsoleController
 		registerCommand("echo", echo, "Echoes arguments back as array (for testing argument parser)");
 		registerCommand("help", help, "Print this help.");
 		registerCommand("hide", hide, "Hide the console.");
+		registerCommand("location", locations, "Find current location of each Roomba in scene.");
+		registerCommand("override", consoleOverride, "Get information about control override status.");
 		registerCommand(repeatCmdName, repeatCommand, "Repeat last command.");
 		registerCommand("reload", reload, "Reload game.");
 		registerCommand("resetprefs", resetPrefs, "Reset & saves player preferences.");
-		registerCommand("location", locations, "Find current location of each Roomba in scene.");
-		registerCommand("override", consoleOverride, "Get information about control override status.");
+		registerCommand("speed", speed, "Find speed of each Roomba in scene.");
 		registerCommand("quit", endGame, "End Roomba operation.");
 	}
 
@@ -255,6 +256,13 @@ public class ConsoleController
 		appendLogLine((GameObject.Find("Roomba2").transform.position).ToString());
     }
 
+	void speed(string[] args)
+    {
+		appendLogLine("Roomba 1: ");
+		appendLogLine((GameObject.Find("Roomba1").GetComponent<AstarAI2>().speed).ToString());
+		appendLogLine("Roomba 2: ");
+		appendLogLine((GameObject.Find("Roomba2").GetComponent<AstarAI2>().speed).ToString());
+	}
 	void consoleOverride(string[] args)
     {
 		
@@ -271,6 +279,7 @@ public class ConsoleController
 
 	void endGame(string[] args)
     {
+		// Need to figure out why this command is not working
 		//Application.Quit();
 		appendLogLine("This command has not been completed yet.");
     }
