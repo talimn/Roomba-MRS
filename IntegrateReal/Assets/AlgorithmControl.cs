@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 /*Summary of script functionality:
@@ -23,82 +24,69 @@ It's ending rotation will be at the line between quadrants 1 and 2.
 
 public class AlgorithmControl : MonoBehaviour
 {
-    // This variable will keep track of how many frames have passed
-    private int x = 0; 
-    
+    //OVERRIDE
+    public Button overrideControl;
+    private int overridePressCounter = 0;
+
     // Will allow us to send commands directly to Roomba
     public BluetoothControlScript btControls;
 
     // Start is called before the first frame update
     void Start()
     {
+        overrideControl.onClick.AddListener(TaskOver);
+
         // Go Forward
         btControls.sendData(1, 'w');
     }
 
-    
+    void TaskOver()
+    {
+        overridePressCounter += 1;
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 100, 100), (1.0f / Time.smoothDeltaTime).ToString());
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (x == 50)
+
+        if (overridePressCounter % 2 == 0)
         {
-            // Turn +45 degrees and go forward
-            btControls.sendData(1, 'd');
-            btControls.sendData(1, 'w');
+            if (Time.fixedTime == 5.0f)
+            {
+
+                btControls.sendData(1, 'w');
+                
+            }
+
+            else if (Time.fixedTime == 10.0f)
+            {
+                btControls.sendData(1, 's');
+            }
+
+            else if (Time.fixedTime == 20.0f)
+            {
+                btControls.sendData(1, 'a');
+                btControls.sendData(1, 'd');
+                btControls.sendData(1, 'd');
+                btControls.sendData(1, 'd');
+                btControls.sendData(1, 'w');
+            }
+
+            else if (Time.fixedTime > 30.0f)
+            {
+                btControls.sendData(1, 's');
+            }
         }
 
-        else if (x == 100)
+        else
         {
-            // Turn -90 degrees and go forward
-            btControls.sendData(1, 'a');
-            btControls.sendData(1, 'a');
-            btControls.sendData(1, 'w');
-        }
-
-        else if(x == 150)
-        {
-            // Stop movement
             btControls.sendData(1, 's');
         }
-
-        else if (x == 200)
-        {
-            // Turn -135 degrees and go forward (backward basically)
-            btControls.sendData(1, 'a');
-            btControls.sendData(1, 'a');
-            btControls.sendData(1, 'a');
-            btControls.sendData(1, 'w');
-        }
-
-        else if (x == 250)
-        {
-            // Turn -45 degrees and go forward
-            btControls.sendData(1, 'a');
-            btControls.sendData(1, 'w');
-        }
-
-        else if (x == 300)
-        {
-            // Turn +90 degrees and go forward
-            btControls.sendData(1, 'd');
-            btControls.sendData(1, 'd');
-            btControls.sendData(1, 'w');
-        }
-
-        else if (x == 350)
-        {
-            // Turn -45 degrees and stop movement
-            btControls.sendData(1, 'a');
-            btControls.sendData(1, 's');
-        }
-
-
-        // This will be the count used for timing the commands
-        if (x < 400)
-        {
-            x++; // Increment x a specified number of times
-        }
-        
         
     }
 }

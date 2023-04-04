@@ -14,7 +14,7 @@ public class BluetoothControlScript : MonoBehaviour
         btRoomba1 = BluetoothHelper.GetInstance();
         btRoomba1 = BluetoothHelper.GetInstance();
 
-        btRoomba1.setDeviceName("4.0James_ESP32");
+        btRoomba1.setDeviceName("5.0James_ESP32");
         btRoomba1.setTerminatorBasedStream("\n");
 
         btRoomba2.setDeviceName("4.0James_ESP32_2");

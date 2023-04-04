@@ -8,6 +8,7 @@ public class UpButton : MonoBehaviour
     public enum OVERRIDE_STATE {NONE, ROOMBA1, ROOMBA2};
     public enum DIRECTION { FORWARD, BACK, LEFT, RIGHT, STOP};
 
+    private int overrideCounter = 0;
     private OVERRIDE_STATE overideState;
     private DIRECTION roomba1Direction;
     private DIRECTION roomba2Direction;
@@ -147,14 +148,33 @@ public class UpButton : MonoBehaviour
 
     void TaskOverride()
     {
+        overrideCounter = overrideCounter + 1;
         Debug.Log("Override clicked.");
         if (toggleChoice(roomba1check.GetComponent<Toggle>().isOn))
         {
-            overideState = OVERRIDE_STATE.ROOMBA1;
+            //overideState = OVERRIDE_STATE.ROOMBA1;
+            if (overrideCounter % 2 == 1)
+            {
+                overideState = OVERRIDE_STATE.ROOMBA1;
+            }
+            else
+            {
+                btControls.sendData(1, 's');
+                overideState = OVERRIDE_STATE.NONE;
+                
+            }
         }
         else if (toggleChoice(roomba2check.GetComponent<Toggle>().isOn))
         {
             overideState = OVERRIDE_STATE.ROOMBA2;
+            /*if ((GameObject.Find("Override Indicator").GetComponent<Image>().color).ToString() == "RGBA(0.000, 255.000, 0.000, 1.000)")
+            {
+                overideState = OVERRIDE_STATE.ROOMBA2;
+            }
+            else
+            {
+                overideState = OVERRIDE_STATE.NONE;
+            }*/
         }
         else
         {
@@ -167,30 +187,46 @@ public class UpButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if ((goUp) && (!goDown) && (!goRight) && (!goLeft) && (!goStop) && (toggleChoice(roomba1check.GetComponent<Toggle>().isOn)) && (overrideStatus))
-        //{
-        //    transform.Translate(0.5f * Time.deltaTime * speed, 0f, 0f);
-        //}
+        if (overideState == OVERRIDE_STATE.NONE)
+        {
+            //Debug.Log(Time.fixedTime);
+            if (Time.fixedTime <= 1.0f)
+            {
+
+                btControls.sendData(1, 'w');
+
+            }
+
+            else if (Time.fixedTime == 10.0f)
+            {
+                btControls.sendData(1, 'a');
+                btControls.sendData(1, '%');
+                btControls.sendData(1, 'a');
+                btControls.sendData(1, 'w');
+            }
+
+            
+
+            else if (Time.fixedTime == 20.0f)
+            {
+                btControls.sendData(1, 'd');
+                btControls.sendData(1, '%');
+                btControls.sendData(1, 'd');
+                btControls.sendData(1, 'w');
+            }
+
+            else if (Time.fixedTime >= 30.0f)
+            {
+                btControls.sendData(1, 's');
+            }
+        }
+
         
-        //else if((goDown) && (!goUp) && (!goRight) && (!goLeft) && (!goStop) && (toggleChoice(roomba1check.GetComponent<Toggle>().isOn)) && (overrideStatus))
-        //{
-        //    transform.Translate(-0.5f * Time.deltaTime * speed, 0f, 0f);
-        //}
+    }
 
-        //else if((!goDown) && (!goUp) && (!goRight) && (goLeft) && (!goStop) && (toggleChoice(roomba1check.GetComponent<Toggle>().isOn)) && (overrideStatus))
-        //{
-        //    transform.Translate(0f, -0.5f * Time.deltaTime * speed, 0f);
-        //}
-
-        //else if((!goDown) && (!goUp) && (goRight) && (!goLeft) && (!goStop) && (toggleChoice(roomba1check.GetComponent<Toggle>().isOn)) && (overrideStatus))
-        //{
-        //    transform.Translate(0f, 0.5f * Time.deltaTime * speed, 0f);
-        //}
-
-        //else if ((!goDown) && (!goUp) && (!goRight) && (!goLeft) && (goStop) && (toggleChoice(roomba1check.GetComponent<Toggle>().isOn)) && (overrideStatus))
-        //{
-        //    transform.Translate(0f * Time.deltaTime * speed, 0f * Time.deltaTime * speed, 0);
-        //}
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 100, 100), (Time.fixedTime).ToString());
     }
 
     public bool toggleChoice(bool togs)
