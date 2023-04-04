@@ -1,0 +1,5 @@
+Roomba can now smoothly transition between override mode and automatic mode. Roomba will begin
+moving according to pathing script and entering override mode will immediately cease movement. 
+Current time since startup is displayed on the screen during operation. Roomba can follow series of
+commands without stopping and the current time determines what command will be sent to the Roomba (for testing purposes).
+Once Roomba finishes path, it will stop. It can still enter and exit override mode at this point.
