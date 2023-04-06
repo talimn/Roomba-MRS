@@ -185,11 +185,15 @@ public class UpButton : MonoBehaviour
     
 
     // Update is called once per frame
+    /*
+     Here is where I am currently running the pathfinding script. The command execution is based on time right now.
+
+    */
     void Update()
     {
         if (overideState == OVERRIDE_STATE.NONE)
         {
-            //Debug.Log(Time.fixedTime);
+            
             if (Time.fixedTime <= 1.0f)
             {
 
@@ -203,6 +207,7 @@ public class UpButton : MonoBehaviour
                 btControls.sendData(1, '%');
                 btControls.sendData(1, 'a');
                 btControls.sendData(1, 'w');
+                
             }
 
             
@@ -215,7 +220,23 @@ public class UpButton : MonoBehaviour
                 btControls.sendData(1, 'w');
             }
 
-            else if (Time.fixedTime >= 30.0f)
+            else if (Time.fixedTime == 30.0f)
+            {
+                btControls.sendData(1, 'a');
+                btControls.sendData(1, '%');
+                btControls.sendData(1, 'a');
+                btControls.sendData(1, 'w');
+            }
+
+            else if (Time.fixedTime == 40.0f)
+            {
+                btControls.sendData(1, 'd');
+                btControls.sendData(1, '%');
+                btControls.sendData(1, 'd');
+                btControls.sendData(1, 'w');
+            }
+
+            else if (Time.fixedTime >= 50.0f)
             {
                 btControls.sendData(1, 's');
             }
