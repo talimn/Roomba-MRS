@@ -11,14 +11,44 @@ public class BluetoothControlScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        btRoomba1 = BluetoothHelper.GetInstance();
-        btRoomba1 = BluetoothHelper.GetInstance();
+        try
+        {
+            btRoomba1 = BluetoothHelper.GetInstance("5.0James_ESP32");
+            //btRoomba2 = BluetoothHelper.GetInstance("4.0James_ESP32_2");
 
-        btRoomba1.setDeviceName("5.0James_ESP32");
-        btRoomba1.setTerminatorBasedStream("\n");
+            btRoomba1.setTerminatorBasedStream("\n");
+            //btRoomba2.setTerminatorBasedStream("\n");
 
-        btRoomba2.setDeviceName("4.0James_ESP32_2");
-        btRoomba2.setTerminatorBasedStream("\n");
+            if (btRoomba1.isDevicePaired())
+            {
+                btRoomba1.Connect();
+                if (btRoomba1.isConnected())
+                {
+                    btRoomba1.StartListening();
+                }
+            }
+
+            //if (btRoomba2.isDevicePaired())
+            //{
+            //    btRoomba2.Connect();
+            //    if (btRoomba2.isConnected())
+            //    {
+            //        btRoomba2.StartListening();
+            //    }
+            //}
+        }
+        catch (BluetoothHelper.BlueToothNotEnabledException ex)
+        {
+
+        }
+        catch(BluetoothHelper.BlueToothNotReadyException ex)
+        {
+
+        }
+        catch (BluetoothHelper.BlueToothNotSupportedException ex)
+        {
+
+        }
     }
 
     // Update is called once per frame
@@ -29,7 +59,13 @@ public class BluetoothControlScript : MonoBehaviour
     public int connectRoombaOne()
     {
         Debug.Log("Attempting to connect Roomba 1");
+        if (btRoomba1.isConnected())
+        {
+            return 1;
+        }
+
         btRoomba1.Connect();
+
         if (btRoomba1.isConnected())
         {
             return 1;
@@ -38,13 +74,20 @@ public class BluetoothControlScript : MonoBehaviour
         {
             return 2;
         }
+        
         return -1;
     }
 
     public int connectRoombaTwo()
     {
         Debug.Log("Attempting to connect Roomba 2");
+        if (btRoomba2.isConnected())
+        {
+            return 1;
+        }
+
         btRoomba2.Connect();
+
         if (btRoomba2.isConnected())
         {
             return 1;
@@ -80,6 +123,7 @@ public class BluetoothControlScript : MonoBehaviour
                     return 1;
                     // Send the Command
                 }
+                Debug.LogWarning("Roomba 1 not Ready. Cannot send Command.");
                 break;
             case 2:
                 if (!isRoombaTwoReady())
@@ -92,6 +136,7 @@ public class BluetoothControlScript : MonoBehaviour
                     return 1;
                     // Send the Command
                 }
+                Debug.LogWarning("Roomba 2 not Ready. Cannot send Command.");
                 break;
         }
         return 0;
