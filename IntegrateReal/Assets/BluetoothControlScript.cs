@@ -6,7 +6,6 @@ using ArduinoBluetoothAPI;
 public class BluetoothControlScript : MonoBehaviour
 {
     BluetoothHelper btRoomba1;
-    BluetoothHelper btRoomba2;
 
     // Start is called before the first frame update
     void Start()
@@ -39,15 +38,15 @@ public class BluetoothControlScript : MonoBehaviour
         }
         catch (BluetoothHelper.BlueToothNotEnabledException ex)
         {
-
+            Debug.LogWarning("BT Not Enabled Ex");
         }
         catch(BluetoothHelper.BlueToothNotReadyException ex)
         {
-
+            Debug.LogWarning("BT Not Ready Ex");
         }
         catch (BluetoothHelper.BlueToothNotSupportedException ex)
         {
-
+            Debug.LogWarning("BT Not Supported Ex");
         }
     }
 
@@ -65,6 +64,7 @@ public class BluetoothControlScript : MonoBehaviour
         }
 
         btRoomba1.Connect();
+        btRoomba1.StartListening();
 
         if (btRoomba1.isConnected())
         {
@@ -78,34 +78,9 @@ public class BluetoothControlScript : MonoBehaviour
         return -1;
     }
 
-    public int connectRoombaTwo()
-    {
-        Debug.Log("Attempting to connect Roomba 2");
-        if (btRoomba2.isConnected())
-        {
-            return 1;
-        }
-
-        btRoomba2.Connect();
-
-        if (btRoomba2.isConnected())
-        {
-            return 1;
-        }
-        else if (btRoomba2.isDevicePaired())
-        {
-            return 2;
-        }
-        return -1;
-    }
-
     public bool isRoombaOneReady()
     {
         return btRoomba1.isConnected();
-    }
-    public bool isRoombaTwoReady()
-    {
-        return btRoomba2.isConnected();
     }
 
     public int sendData(int RoombaNum, char command)
@@ -116,6 +91,7 @@ public class BluetoothControlScript : MonoBehaviour
                 if (!isRoombaOneReady())
                 {
                     connectRoombaOne(); // If not ready, try and make it ready.  
+                    btRoomba1.StartListening();
                 }
                 if (isRoombaOneReady())
                 {
@@ -125,20 +101,12 @@ public class BluetoothControlScript : MonoBehaviour
                 }
                 Debug.LogWarning("Roomba 1 not Ready. Cannot send Command.");
                 break;
-            case 2:
-                if (!isRoombaTwoReady())
-                {
-                    connectRoombaTwo(); // If not ready, try and make it ready.  
-                }
-                if (isRoombaTwoReady())
-                {
-                    btRoomba1.SendData(command + "\n");
-                    return 1;
-                    // Send the Command
-                }
-                Debug.LogWarning("Roomba 2 not Ready. Cannot send Command.");
-                break;
         }
         return 0;
+    }
+
+    void OnDestroy()
+    {
+        btRoomba1.Disconnect();
     }
 }
