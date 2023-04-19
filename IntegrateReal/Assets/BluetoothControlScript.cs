@@ -12,11 +12,14 @@ public class BluetoothControlScript : MonoBehaviour
     {
         try
         {
-            btRoomba1 = BluetoothHelper.GetInstance("5.0James_ESP32");
+            btRoomba1 = BluetoothHelper.GetInstance("4.0James_ESP32");
             //btRoomba2 = BluetoothHelper.GetInstance("4.0James_ESP32_2");
 
             btRoomba1.setTerminatorBasedStream("\n");
             //btRoomba2.setTerminatorBasedStream("\n");
+
+            btRoomba1.OnDataReceived += DataRecieved;
+            btRoomba1.OnConnected += WhenConnected;
 
             if (btRoomba1.isDevicePaired())
             {
@@ -103,6 +106,19 @@ public class BluetoothControlScript : MonoBehaviour
                 break;
         }
         return 0;
+    }
+
+    void DataRecieved()
+    {
+        if (btRoomba1.Available)
+        {
+            Debug.Log(btRoomba1.Read());
+        }
+    }
+
+    void WhenConnected()
+    {
+        btRoomba1.StartListening();
     }
 
     void OnDestroy()
