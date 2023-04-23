@@ -7,12 +7,20 @@ public class BluetoothControlScript : MonoBehaviour
 {
     BluetoothHelper btRoomba1;
 
+    public double[] sensorArray_5F = { 0.0, 0.0, 0.0, 0.0, 0.0 };
+    public double[] locationArray_3F = { 0.0, 0.0, 0.0 };
+    public bool dataDirty = true;
+
+    string input;
+    string[] sensors;
+    string[] locations;
+
     // Start is called before the first frame update
     void Start()
     {
         try
         {
-            btRoomba1 = BluetoothHelper.GetInstance("4.0James_ESP32");
+            btRoomba1 = BluetoothHelper.GetInstance("5.0James_ESP32");
             //btRoomba2 = BluetoothHelper.GetInstance("4.0James_ESP32_2");
 
             btRoomba1.setTerminatorBasedStream("\n");
@@ -56,6 +64,7 @@ public class BluetoothControlScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        dataDirty = false;
     }
 
     public int connectRoombaOne()
@@ -112,7 +121,37 @@ public class BluetoothControlScript : MonoBehaviour
     {
         if (btRoomba1.Available)
         {
-            Debug.Log(btRoomba1.Read());
+            dataDirty = true;
+            input = btRoomba1.Read();
+
+            switch(input.Substring(0,4))
+            {
+                case "POS:":
+                    Debug.Log("Roomba 1: Retrieved Location Data.");
+                    input = input.Remove(0, 4);
+                    locations = input.Split(',');
+                    if (locations[0].Equals("N/A"))
+                        break;
+                    locationArray_3F[0] = double.Parse(locations[0]);
+                    locationArray_3F[1] = double.Parse(locations[1]);
+                    locationArray_3F[2] = double.Parse(locations[2]);
+                    break;
+
+                case "Sens":
+                    Debug.Log("Roomba 1: Retrieved Sensor Data.");
+                    input = input.Remove(0, 9);
+                    sensors = input.Split(',');
+                    sensorArray_5F[0] = double.Parse(sensors[0]);
+                    sensorArray_5F[1] = double.Parse(sensors[1]);
+                    sensorArray_5F[2] = double.Parse(sensors[2]);
+                    sensorArray_5F[3] = double.Parse(sensors[3]);
+                    sensorArray_5F[4] = double.Parse(sensors[4].Trim('.'));
+                    break;
+
+                case "Succ":
+                    Debug.Log("Roomba 1: " + input);
+                    break;
+            }
         }
     }
 
