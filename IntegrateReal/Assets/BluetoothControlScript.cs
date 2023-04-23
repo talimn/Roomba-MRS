@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using ArduinoBluetoothAPI;
 
 public class BluetoothControlScript : MonoBehaviour
@@ -14,6 +15,9 @@ public class BluetoothControlScript : MonoBehaviour
     string input;
     string[] sensors;
     string[] locations;
+
+    //Indicator Light
+    public GameObject connectorLight;
 
     // Start is called before the first frame update
     void Start()
@@ -155,6 +159,7 @@ public class BluetoothControlScript : MonoBehaviour
 
     void WhenConnected()
     {
+        connectorLight.GetComponent<Image>().color = new Color(0f, 255f, 0f);
         btRoomba1.StartListening();
     }
 

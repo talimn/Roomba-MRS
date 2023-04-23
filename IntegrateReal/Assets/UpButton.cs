@@ -13,18 +13,23 @@ public class UpButton : MonoBehaviour
     private DIRECTION roomba1Direction;
     private DIRECTION roomba2Direction;
 
-    public Button m_UpButton, m_DownButton, m_LeftButton, m_RightButton, m_StopButton, m_OverrideButton;
+    public Button m_StartButton, m_UpButton, m_DownButton, m_LeftButton, m_RightButton, m_StopButton, m_OverrideButton;
     public GameObject rmba;
     public GameObject roomba1check;
     public GameObject roomba2check;
     public BluetoothControlScript btControls;
 
     private float speed = 2.0f;
+
+    //Variables for added start button
+    private bool canStart = false;
+    private float currentTime = 0f;
        
 
     void Start()
     {
         overideState = OVERRIDE_STATE.NONE;
+        m_StartButton.onClick.AddListener(TaskStart);
         m_UpButton.onClick.AddListener(TaskUp);
         m_DownButton.onClick.AddListener(TaskDown);
         m_LeftButton.onClick.AddListener(TaskLeft);
@@ -33,6 +38,11 @@ public class UpButton : MonoBehaviour
         m_OverrideButton.onClick.AddListener(TaskOverride);
         Debug.Log("Starting Roomba 1 Connection" + btControls.connectRoombaOne());
         //Debug.Log("Starting Roomba 2 Connection" + btControls.connectRoombaTwo());
+    }
+
+    void TaskStart()
+    {
+        canStart = true;
     }
 
     void TaskUp()
@@ -192,17 +202,17 @@ public class UpButton : MonoBehaviour
     */
     void Update()
     {
-        if (overideState == OVERRIDE_STATE.NONE)
+        if (overideState == OVERRIDE_STATE.NONE && canStart)
         {
-            
-            if (Time.fixedTime <= 1.0f)
+            currentTime = Time.fixedTime;
+            if (Time.fixedTime == currentTime + 1)
             {
 
                 btControls.sendData(1, 'w');
 
             }
 
-            else if (Time.fixedTime == 10.0f)
+            /*else if (Time.fixedTime == 10.0f)
             {
                 btControls.sendData(1, 'a');
                 btControls.sendData(1, '%');
@@ -240,7 +250,7 @@ public class UpButton : MonoBehaviour
             else if (Time.fixedTime >= 50.0f)
             {
                 btControls.sendData(1, 's');
-            }
+            }*/
         }
 
         if (btControls.dataDirty)
