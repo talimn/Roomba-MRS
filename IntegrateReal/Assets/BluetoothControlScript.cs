@@ -67,7 +67,12 @@ public class BluetoothControlScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {    }
+    {
+        if (!btRoomba1.isConnected())
+        {
+            btRoomba1.Connect();
+        }
+    }
 
     public int connectRoombaOne()
     {
@@ -125,8 +130,9 @@ public class BluetoothControlScript : MonoBehaviour
         {
             dataDirty = true;
             input = btRoomba1.Read();
+            Debug.Log(input);
 
-            switch(input.Substring(0,4))
+            switch (input.Substring(0, 4))
             {
                 case "POS:":
                     Debug.Log("Roomba 1: Retrieved Location Data.");
@@ -159,12 +165,13 @@ public class BluetoothControlScript : MonoBehaviour
 
     void WhenConnected()
     {
-        connectorLight.GetComponent<Image>().color = new Color(0f, 255f, 0f);
         btRoomba1.StartListening();
+        connectorLight.GetComponent<Image>().color = new Color(0f, 255f, 0f);
     }
 
     void OnDestroy()
     {
+        //btRoomba1.StopListening();
         btRoomba1.Disconnect();
     }
 }
