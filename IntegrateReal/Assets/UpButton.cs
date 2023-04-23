@@ -141,7 +141,8 @@ public class UpButton : MonoBehaviour
                 // Send a stop command to Roomba 2
                 break;
             case OVERRIDE_STATE.NONE:
-
+                roomba1Direction = DIRECTION.STOP;
+                btControls.sendData(1, 's');
                 break;
         }
     }
@@ -246,6 +247,7 @@ public class UpButton : MonoBehaviour
         {
             Debug.Log("Location Data: X:" + btControls.locationArray_3F[0] + " Y:" + btControls.locationArray_3F[1] + " Z:" + btControls.locationArray_3F[2]);
             Debug.Log("Sensor Data: 1: " + btControls.sensorArray_5F[0] + " 2:" + btControls.sensorArray_5F[1] + " 3:" + btControls.sensorArray_5F[2] + " 4:" + btControls.sensorArray_5F[3] + " 5:" + btControls.sensorArray_5F[4]);
+            btControls.dataDirty = false;
         }
     }
 

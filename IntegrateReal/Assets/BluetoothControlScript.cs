@@ -63,9 +63,7 @@ public class BluetoothControlScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        dataDirty = false;
-    }
+    {    }
 
     public int connectRoombaOne()
     {
