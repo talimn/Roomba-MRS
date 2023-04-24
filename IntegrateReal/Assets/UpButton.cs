@@ -23,8 +23,19 @@ public class UpButton : MonoBehaviour
 
     //Variables for added start button
     private bool canStart = false;
+    private int startX = 0;
     private float currentTime = 0f;
-       
+
+    // Obstacle Detection
+    int sensorNumber;
+    int sensorOneCounter = 0;
+    int sensorTwoCounter = 0;
+    int sensorFourCounter = 0;
+    int sensorFiveCounter = 0;
+
+    // Localization
+    int upCounter = 0;
+    int bottomCounter = 0;
 
     void Start()
     {
@@ -170,9 +181,8 @@ public class UpButton : MonoBehaviour
             }
             else
             {
-                btControls.sendData(1, 's');
                 overideState = OVERRIDE_STATE.NONE;
-                
+                btControls.sendData(1, 's');
             }
         }
         else if (toggleChoice(roomba2check.GetComponent<Toggle>().isOn))
@@ -202,61 +212,86 @@ public class UpButton : MonoBehaviour
     */
     void Update()
     {
+
+        // PATHFINDING
         if (overideState == OVERRIDE_STATE.NONE && canStart)
         {
-            currentTime = Time.fixedTime;
-            if (Time.fixedTime == currentTime + 1)
+            Debug.Log("ON PATH");
+            // Obstacle Detection
+            if (Min() <= 210.0 && btControls.locationArray_3F[1] != 3.0 && btControls.locationArray_3F[1] != 0.0)
             {
+                switch (sensorNumber)
+                {
+                    case 1:
 
-                btControls.sendData(1, 'w');
-
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        btControls.sendData(1, 'd');
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                }
             }
 
-            /*else if (Time.fixedTime == 10.0f)
+            else
             {
-                btControls.sendData(1, 'a');
-                btControls.sendData(1, '%');
-                btControls.sendData(1, 'a');
-                btControls.sendData(1, 'w');
-                
+                startX += 1;
+                if (startX == 1)
+                {
+                    btControls.sendData(1, 'w');
+                }
+
+                // If reaching top of square
+                else if (btControls.locationArray_3F[1] == 3.0)
+                {
+                    btControls.sendData(1, 'd');
+                    btControls.sendData(1, '%');
+                    btControls.sendData(1, 'd');
+                    btControls.sendData(1, 'w');
+                }
+
+                // If reaching bottom of square
+                else if (btControls.locationArray_3F[1] == 0.0)
+                {
+                    btControls.sendData(1, 'a');
+                    btControls.sendData(1, '%');
+                    btControls.sendData(1, 'a');
+                    btControls.sendData(1, 'w');
+                }
             }
 
             
+            
+        }
 
-            else if (Time.fixedTime == 20.0f)
-            {
-                btControls.sendData(1, 'd');
-                btControls.sendData(1, '%');
-                btControls.sendData(1, 'd');
-                btControls.sendData(1, 'w');
-            }
+        else if (overideState == OVERRIDE_STATE.ROOMBA1)
+        {
+            Debug.Log("OVERRIDE");
+        }
 
-            else if (Time.fixedTime == 30.0f)
-            {
-                btControls.sendData(1, 'a');
-                btControls.sendData(1, '%');
-                btControls.sendData(1, 'a');
-                btControls.sendData(1, 'w');
-            }
-
-            else if (Time.fixedTime == 40.0f)
-            {
-                btControls.sendData(1, 'd');
-                btControls.sendData(1, '%');
-                btControls.sendData(1, 'd');
-                btControls.sendData(1, 'w');
-            }
-
-            else if (Time.fixedTime >= 50.0f)
-            {
-                btControls.sendData(1, 's');
-            }*/
+        // Localization
+        switch (btControls.locationArray_3F[1])
+        {
+            case 3:
+                upCounter += 1;
+                break;
+            case 0:
+                bottomCounter += 1;
+                break;
         }
 
         if (btControls.dataDirty)
         {
+            // bottom left corner of square (x-y axis) is origin
             Debug.Log("Location Data: X:" + btControls.locationArray_3F[0] + " Y:" + btControls.locationArray_3F[1] + " Z:" + btControls.locationArray_3F[2]);
+            // sensor values in mm, want distance for obstacle detection to be 210 mm
             Debug.Log("Sensor Data: 1: " + btControls.sensorArray_5F[0] + " 2: " + btControls.sensorArray_5F[1] + " 3: " + btControls.sensorArray_5F[2] + " 4: " + btControls.sensorArray_5F[3] + " 5: " + btControls.sensorArray_5F[4]);
+            //Debug.Log("Minimum distance: " + Min());
+            
             btControls.dataDirty = false;
         }
     }
@@ -271,4 +306,30 @@ public class UpButton : MonoBehaviour
         return togs;
     }
 
+    double Min()
+    {
+        double min = btControls.sensorArray_5F[0];
+        sensorNumber = 0;
+
+        for (int i = 0; i < 5; i++)
+        {
+            double number = btControls.sensorArray_5F[i];
+
+            if (number < min)
+            {
+                sensorNumber = i + 1;
+                min = number;
+                
+            }
+
+            else
+            {
+                sensorNumber = sensorNumber + 1;
+            }
+        }
+        
+        return min;
+    }
+
+    
 }
