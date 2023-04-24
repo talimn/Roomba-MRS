@@ -216,9 +216,9 @@ public class UpButton : MonoBehaviour
         // PATHFINDING
         if (overideState == OVERRIDE_STATE.NONE && canStart)
         {
-            Debug.Log("ON PATH");
+            //Debug.Log("ON PATH");
             // Obstacle Detection
-            if (Min() <= 210.0 && btControls.locationArray_3F[1] != 3.0 && btControls.locationArray_3F[1] != 0.0)
+            if (Min() <= 210.0 && btControls.locationArray_3F[1] != 3.0 && btControls.locationArray_3F[1] != 0.0) //CHANGE TO INCHES!
             {
                 switch (sensorNumber)
                 {
@@ -246,7 +246,7 @@ public class UpButton : MonoBehaviour
                 }
 
                 // If reaching top of square
-                else if (btControls.locationArray_3F[1] == 3.0)
+                else if (btControls.locationArray_3F[1] == 3.0) // CHANGE TO INCHES!
                 {
                     btControls.sendData(1, 'd');
                     btControls.sendData(1, '%');
@@ -270,16 +270,21 @@ public class UpButton : MonoBehaviour
 
         else if (overideState == OVERRIDE_STATE.ROOMBA1)
         {
-            Debug.Log("OVERRIDE");
+            //Debug.Log("OVERRIDE");
+            // Obstacle Detection
+            if (Min() <= 210.0)
+            {
+                Debug.Log("Obstacle Detected!");
+            }
         }
 
         // Localization
         switch (btControls.locationArray_3F[1])
         {
-            case 3:
+            case 3: //CHANGE TO INCHES!
                 upCounter += 1;
                 break;
-            case 0:
+            case 0: 
                 bottomCounter += 1;
                 break;
         }

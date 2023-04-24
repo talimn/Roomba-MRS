@@ -21,9 +21,9 @@ public class ConsoleController
 	#endregion
 
 
-	
 
 
+	public BluetoothControlScript btController;
 	class CommandRegistration
 	{
 		public string command { get; private set; }
@@ -251,9 +251,9 @@ public class ConsoleController
 	void locations(string[] args)
     {
 		appendLogLine("Roomba 1: ");
-		appendLogLine((GameObject.Find("Roomba1").transform.position).ToString());
-		appendLogLine("Roomba 2: ");
-		appendLogLine((GameObject.Find("Roomba2").transform.position).ToString());
+		appendLogLine("("+btController.locationArray_3F[0]+", "+btController.locationArray_3F[1]+", "+btController.locationArray_3F[2]+")");
+		//appendLogLine("Roomba 2: ");
+		//appendLogLine((GameObject.Find("Roomba2").transform.position).ToString());
     }
 
 	void speed(string[] args)
