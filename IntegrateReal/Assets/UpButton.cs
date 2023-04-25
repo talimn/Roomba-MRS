@@ -268,7 +268,7 @@ public class UpButton : MonoBehaviour
                 }
             }*/
 
-            if (btControls.locationArray_3F[0] <= 110)
+            if (btControls.locationArray_3F[0] >= 20)
             {
                 startX += 1;
                 if (startX == 1)
@@ -281,10 +281,10 @@ public class UpButton : MonoBehaviour
                 {
                     bot = false;
                     top = true;
-                    btControls.sendData(1, 'd');
+                    btControls.sendData(1, 'a');
                     btControls.sendData(1, '%');
                     btControls.sendData(1, '%');
-                    btControls.sendData(1, 'd');
+                    btControls.sendData(1, 'a');
                     btControls.sendData(1, 'w');
                 }
 
@@ -294,18 +294,18 @@ public class UpButton : MonoBehaviour
                 }
 
                 // If reaching bottom of square
-                else if (btControls.locationArray_3F[1] <= 15.0 & !bot)
+                else if (btControls.locationArray_3F[1] <= 20.0 & !bot)
                 {
                     bot = true;
                     top = false;
-                    btControls.sendData(1, 'a');
+                    btControls.sendData(1, 'd');
                     btControls.sendData(1, '%');
                     btControls.sendData(1, '%');
-                    btControls.sendData(1, 'a');
+                    btControls.sendData(1, 'd');
                     btControls.sendData(1, 'w');
                 }
 
-                else if (btControls.locationArray_3F[1] <= 15.0 & bot)
+                else if (btControls.locationArray_3F[1] <= 20.0 & bot)
                 {
                     // Keep moving up
                 }
