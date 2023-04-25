@@ -130,23 +130,23 @@ public class BluetoothControlScript : MonoBehaviour
         {
             dataDirty = true;
             input = btRoomba1.Read();
-            Debug.Log(input);
+            //Debug.Log(input);
 
             switch (input.Substring(0, 4))
             {
                 case "POS:":
-                    Debug.Log("Roomba 1: Retrieved Location Data.");
-                    input = input.Remove(0, 4);
+                    //Debug.Log("Roomba 1: Retrieved Location Data.");
+                    input = input.Remove(0, 5);
                     locations = input.Split(',');
                     if (locations[0].Equals("N/A"))
                         break;
                     locationArray_3F[0] = double.Parse(locations[0]);
                     locationArray_3F[1] = double.Parse(locations[1]);
-                    locationArray_3F[2] = double.Parse(locations[2]);
+                    locationArray_3F[2] = double.Parse(locations[2].Trim(']'));
                     break;
 
                 case "Sens":
-                    Debug.Log("Roomba 1: Retrieved Sensor Data.");
+                    //Debug.Log("Roomba 1: Retrieved Sensor Data.");
                     input = input.Remove(0, 9);
                     sensors = input.Split(',');
                     sensorArray_5F[0] = double.Parse(sensors[0]);

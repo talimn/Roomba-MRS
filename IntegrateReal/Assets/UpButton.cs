@@ -203,13 +203,17 @@ public class UpButton : MonoBehaviour
         }
     }
 
-    
+
 
     // Update is called once per frame
     /*
      Here is where I am currently running the pathfinding script. The command execution is based on time right now.
 
     */
+
+    bool top = false;
+    bool bot = true;
+
     void Update()
     {
 
@@ -218,7 +222,7 @@ public class UpButton : MonoBehaviour
         {
             //Debug.Log("ON PATH");
             // Obstacle Detection
-            if (Min() <= 210.0 && btControls.locationArray_3F[1] != 3.0 && btControls.locationArray_3F[1] != 0.0) //CHANGE TO INCHES!
+            /*if (Min() <= 210.0 && btControls.locationArray_3F[1] != 120.0 && btControls.locationArray_3F[1] != 0.0) //CHANGE TO INCHES!
             {
                 switch (sensorNumber)
                 {
@@ -246,7 +250,7 @@ public class UpButton : MonoBehaviour
                 }
 
                 // If reaching top of square
-                else if (btControls.locationArray_3F[1] == 3.0) // CHANGE TO INCHES!
+                else if (btControls.locationArray_3F[1] == 120.0) // CHANGE TO INCHES!
                 {
                     btControls.sendData(1, 'd');
                     btControls.sendData(1, '%');
@@ -262,9 +266,50 @@ public class UpButton : MonoBehaviour
                     btControls.sendData(1, 'a');
                     btControls.sendData(1, 'w');
                 }
-            }
+            }*/
 
-            
+            if (btControls.locationArray_3F[0] <= 110)
+            {
+                startX += 1;
+                if (startX == 1)
+                {
+                    btControls.sendData(1, 'w');
+                }
+
+                // If reaching top of square
+                else if (btControls.locationArray_3F[1] >= 50.0 & !top) // CHANGE TO INCHES!
+                {
+                    bot = false;
+                    top = true;
+                    btControls.sendData(1, 'd');
+                    btControls.sendData(1, '%');
+                    btControls.sendData(1, '%');
+                    btControls.sendData(1, 'd');
+                    btControls.sendData(1, 'w');
+                }
+
+                else if (btControls.locationArray_3F[1] >= 50.0 & top)
+                {
+                    // Keep moving down
+                }
+
+                // If reaching bottom of square
+                else if (btControls.locationArray_3F[1] <= 15.0 & !bot)
+                {
+                    bot = true;
+                    top = false;
+                    btControls.sendData(1, 'a');
+                    btControls.sendData(1, '%');
+                    btControls.sendData(1, '%');
+                    btControls.sendData(1, 'a');
+                    btControls.sendData(1, 'w');
+                }
+
+                else if (btControls.locationArray_3F[1] <= 15.0 & bot)
+                {
+                    // Keep moving up
+                }
+            }
             
         }
 

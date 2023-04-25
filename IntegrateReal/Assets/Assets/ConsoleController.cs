@@ -251,7 +251,8 @@ public class ConsoleController
 	void locations(string[] args)
     {
 		appendLogLine("Roomba 1: ");
-		appendLogLine("("+btController.locationArray_3F[0]+", "+btController.locationArray_3F[1]+", "+btController.locationArray_3F[2]+")");
+		//appendLogLine(GameObject.Find<BluetoothControlScript>("Bluetooth Control").locationArray_5F[0].ToString());
+		//appendLogLine(("(" + btController.locationArray_3F[0].ToString() + ", " + btController.locationArray_3F[1].ToString() + ", " + btController.locationArray_3F[2].ToString() + ")").ToString());
 		//appendLogLine("Roomba 2: ");
 		//appendLogLine((GameObject.Find("Roomba2").transform.position).ToString());
     }
