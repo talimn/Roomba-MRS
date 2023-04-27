@@ -21,9 +21,21 @@ public class UpButton : MonoBehaviour
 
     private float speed = 2.0f;
 
-    //Variables for added start button
+    // Variables for added start button
     private bool canStart = false;
     private int startX = 0;
+
+    // Variables for pathfinding purposes
+    private int startY = 0;
+    private int startZ = 0;
+    private int startW = 0;
+    private int startV = 0;
+    private int startC = 0;
+    private float yTime = 0f;
+    private float zTime = 0f;
+    private float wTime = 0f;
+    private int obstacleCounter = 0;
+    private float obstacleTime = 0f;
     private float currentTime = 0f;
 
     // Obstacle Detection
@@ -32,6 +44,9 @@ public class UpButton : MonoBehaviour
     int sensorTwoCounter = 0;
     int sensorFourCounter = 0;
     int sensorFiveCounter = 0;
+    bool obstacleDetectedStatus = false;
+    int counterOne = 0;
+    int counterTwo = 0;
 
     // Localization
     int upCounter = 0;
@@ -216,7 +231,7 @@ public class UpButton : MonoBehaviour
 
     void Update()
     {
-
+        
         // PATHFINDING
         if (overideState == OVERRIDE_STATE.NONE && canStart)
         {
@@ -268,23 +283,107 @@ public class UpButton : MonoBehaviour
                 }
             }*/
 
-            if (btControls.locationArray_3F[0] >= 20)
+            if (btControls.locationArray_3F[1] >= 0)
             {
                 startX += 1;
+                Min();
+                /*if (startX == 1)
+                {
+                    btControls.sendData(1, 'w');
+                }*/
+                /*if (obstacleDetectedStatus == true & sensorNumber != 4 & btControls.locationArray_3F[0] <= 40.0)
+                {
+                    btControls.sendData(1, 's');
+                    counterTwo += 1;
+                }*/
+
+                //PATHFINDING ONLY
                 if (startX == 1)
                 {
+                    btControls.sendData(1, 'z');
+                    
                     btControls.sendData(1, 'w');
                 }
 
+                
+                /*else if (btControls.locationArray_3F[0] < 50.0 & obstacleDetectedStatus == false & counterOne == 0 & counterTwo > 0)
+                {
+                    counterOne += 1;
+                    btControls.sendData(1, 'w');
+                }*/
+
+
+                else if (btControls.locationArray_3F[0] >= 50.0 & startY == 0)
+                {
+                    startY += 1;
+                    yTime = Time.fixedTime + 5.0f;
+                    btControls.sendData(1, 's');
+                    btControls.sendData(1, 'z');
+                    //btControls.sendData(1, 'w');
+                }
+
+                else if (btControls.locationArray_3F[0] >= 50.0 & startZ == 0 & Time.fixedTime >= yTime & yTime > 0f)
+                {
+                    startZ += 1;
+                    zTime = Time.fixedTime + 4.5f;
+                    btControls.sendData(1, 'w');
+                }
+
+                else if(btControls.locationArray_3F[0] >= 65.0 & startW == 0 & Time.fixedTime >= zTime & zTime > 0f)
+                {
+                    startW += 1;
+                    wTime = Time.fixedTime + 5.0f;
+                    btControls.sendData(1, 's');
+                    btControls.sendData(1, 'd');
+                }
+
+                else if (btControls.locationArray_3F[0] >= 65.0 & startV == 0 & Time.fixedTime >= wTime & wTime > 0f)
+                {
+                    startV += 1;
+                    btControls.sendData(1, 'w');
+                }
+
+                else if (btControls.locationArray_3F[1] >= 75.0)
+                {
+                    btControls.sendData(1, 's');
+                }
+                
+                /*else if (btControls.locationArray_3F[0] >= 60.0 & startZ == 0)
+                {
+                    startZ += 1;
+                    btControls.sendData(1, 's');
+                    btControls.sendData(1, 'd');
+                    btControls.sendData(1, 'w');
+                }*/
+
+                /*else if (btControls.locationArray_3F[1] >= 80.0)
+                {
+                    btControls.sendData(1, 's');
+                }*/
+                // rough obstacle detection
+                if (Min() <= 210.0)
+                {
+                    Debug.LogWarning("OBSTACLE DETECTED BY SENSOR " + sensorNumber + "!");
+                }
+
+
+
+
+                // CLEANING ONLY
                 // If reaching top of square
-                else if (btControls.locationArray_3F[1] >= 50.0 & !top) // CHANGE TO INCHES!
+                /*else if (btControls.locationArray_3F[1] >= 50.0 & !top) // CHANGE TO INCHES!
                 {
                     bot = false;
                     top = true;
+                    btControls.sendData(1, 's');
                     btControls.sendData(1, 'a');
+                    btControls.sendData(1, 's');
                     btControls.sendData(1, '%');
+                    btControls.sendData(1, 's');
                     btControls.sendData(1, '%');
+                    btControls.sendData(1, 's');
                     btControls.sendData(1, 'a');
+                    btControls.sendData(1, 's');
                     btControls.sendData(1, 'w');
                 }
 
@@ -298,17 +397,22 @@ public class UpButton : MonoBehaviour
                 {
                     bot = true;
                     top = false;
+                    btControls.sendData(1, 's');
                     btControls.sendData(1, 'd');
+                    btControls.sendData(1, 's');
                     btControls.sendData(1, '%');
+                    btControls.sendData(1, 's');
                     btControls.sendData(1, '%');
+                    btControls.sendData(1, 's');
                     btControls.sendData(1, 'd');
+                    btControls.sendData(1, 's');
                     btControls.sendData(1, 'w');
                 }
 
-                else if (btControls.locationArray_3F[1] <= 20.0 & bot)
+                else if (btControls.locationArray_3F[1] <= 30.0 & bot)
                 {
                     // Keep moving up
-                }
+                }*/
             }
             
         }
@@ -317,9 +421,9 @@ public class UpButton : MonoBehaviour
         {
             //Debug.Log("OVERRIDE");
             // Obstacle Detection
-            if (Min() <= 210.0)
+            if (Min() <= 150.0)
             {
-                Debug.Log("Obstacle Detected!");
+                Debug.LogWarning("Obstacle Detected by Sensor " + sensorNumber);
             }
         }
 
@@ -346,20 +450,24 @@ public class UpButton : MonoBehaviour
         }
     }
 
+    // This is to run a Time.fixedTime timer in the upper left corner of game play screen
     void OnGUI()
     {
         GUI.Label(new Rect(0, 0, 100, 100), (Time.fixedTime).ToString());
     }
 
+    // Roomba selected for override
     public bool toggleChoice(bool togs)
     {
         return togs;
     }
 
+    // If obstacle detected in range equal to or less than min, change status to true
     double Min()
     {
+        
         double min = btControls.sensorArray_5F[0];
-        sensorNumber = 0;
+        sensorNumber = -1;
 
         for (int i = 0; i < 5; i++)
         {
@@ -378,6 +486,16 @@ public class UpButton : MonoBehaviour
             }
         }
         
+        if (min < 300)
+        {
+            obstacleDetectedStatus = true;
+        }
+
+        else
+        {
+            obstacleDetectedStatus = false;
+        }
+
         return min;
     }
 
